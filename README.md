@@ -2,13 +2,6 @@
 
 اسکلت اولیه (scaffold) پروژه بر اساس سناریوی چالش، با Clean Architecture برای هر سه سرویس.
 
-## نکته درباره‌ی نسخه C#
-
-.NET 8 از C# 12 و .NET 9 از C# 13 استفاده می‌کند - نسخه‌ای به اسم "C# 10" مربوط به .NET 6 است.
-در تمام پروژه‌ها `TargetFramework=net9.0` و `LangVersion=latest` تنظیم شده تا در Visual Studio 2026
-جدیدترین قابلیت‌های زبان (primary constructors، collection expressions، required members و ...) در دسترس باشد.
-اگر ترجیح می‌دهید روی .NET 8 کار کنید، فقط کافیست در `Directory.Build.props` مقدار `net9.0` را به `net8.0` تغییر دهید.
-
 ## پیش‌نیازها
 
 1. Visual Studio 2026 با Workload های **ASP.NET and web development**
@@ -49,12 +42,6 @@ Add-Migration InitialCreate -Project Payment.Infrastructure -StartupProject Paym
 Update-Database -Project Payment.Infrastructure -StartupProject Payment.Api
 ```
 
-یا از CLI (بعد از `dotnet tool install --global dotnet-ef`):
-
-```bash
-dotnet ef migrations add InitialCreate -p src/Services/Customer/Customer.Infrastructure -s src/Services/Customer/Customer.Api
-dotnet ef database update -p src/Services/Customer/Customer.Infrastructure -s src/Services/Customer/Customer.Api
-```
 (همین کار را برای Order و Payment هم تکرار کنید.)
 
 ### ۴. اجرا و تست
@@ -74,15 +61,6 @@ dotnet ef database update -p src/Services/Customer/Customer.Infrastructure -s sr
 
 پنل RabbitMQ (http://localhost:15672) را هم باز نگه دارید تا صف‌ها و پیام‌های رد و بدل شده را ببینید.
 
-### ۵. Keycloak (اختیاری برای شروع)
-
-خطوط `AddKeycloakWebApiAuthentication` و `UseAuthentication/UseAuthorization` در هر `Program.cs`
-کامنت شده‌اند تا در قدم اول بتوانید بدون درگیری با Realm/Client، سرویس‌ها را تست کنید.
-وقتی آماده بودید:
-1. وارد http://localhost:8080 شوید و یک Realm به اسم `order-management` بسازید.
-2. برای هر سرویس یک Client (`customer-service`, `order-service`, `payment-service`) بسازید.
-3. کامنت‌های مربوط به Keycloak را در `Program.cs` هر سرویس بردارید.
-
 ## ساختار پروژه
 
 ```
@@ -98,12 +76,3 @@ src/
     Order/        (همان ساختار + MassTransit Publisher/Consumer)
     Payment/      (همان ساختار + MassTransit Consumer/Publisher)
 ```
-
-## نکاتی که باید خودتان تکمیل کنید (فراتر از اسکلت اولیه)
-
-- Validation ورودی (مثلاً با FluentValidation)
-- مدیریت خطا و Middleware مرکزی (Exception Handling)
-- Health Checks برای هر سرویس (`AddHealthChecks`)
-- Dockerfile برای هر Api جهت containerize کردن کامل (فعلاً فقط زیرساخت‌ها Docker هستند)
-- API Gateway (اختیاری، مثلاً YARP) در صورت نیاز به یک نقطه ورود واحد
-- تست‌های واحد برای Application Layer (Command/Query Handler ها)
