@@ -1,7 +1,5 @@
 # سیستم مدیریت سفارشات - Microservices
 
-اسکلت اولیه (scaffold) پروژه بر اساس سناریوی چالش، با Clean Architecture برای هر سه سرویس.
-
 ## پیش‌نیازها
 
 1. Visual Studio 2026 با Workload های **ASP.NET and web development**
