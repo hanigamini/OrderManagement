@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "Multiple startup projects",
+    "Projects": [
+      {
+        "Path": "src\\Services\\Customer\\Customer.Api\\Customer.Api.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "src\\Services\\Order\\Order.Api\\Order.Api.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "src\\Services\\Payment\\Payment.Api\\Payment.Api.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  }
+]
