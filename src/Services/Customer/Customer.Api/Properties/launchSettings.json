@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Customer.Api": {
+      "commandName": "Project",
+      "commandLineArgs": "--urls=\"https://localhost:7101;http://localhost:5101\""
+    }
+  }
+}
